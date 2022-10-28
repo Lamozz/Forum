@@ -1,3 +1,5 @@
+using Forum.Api.Infrastructure.Attributes;
+using Forum.Api.Infrastructure.Extensions;
 using Forum.Bll;
 using Forum.Bll.Interfaces;
 using Forum.Bll.Services;
@@ -10,8 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//builder.Services.AddControllers(c => c.Filters.Add(typeof(ApiExceptionFilterAttribute)));
-builder.Services.AddControllers();
+builder.Services.AddControllers(c => c.Filters.Add(typeof(ApiExceptionFilterAttribute)));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,8 +26,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
-//app.UseCustomExceptionHandling();
-//app.UseExceptionLogger();
+app.UseCustomExceptionHandler();
+app.UseExceptionLogger();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -38,7 +39,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-//app.UseTransactions();
+app.UseTransaction();
 
 app.MapControllers();
 

@@ -2,11 +2,11 @@
 
 namespace Forum.Common.Exeptions
 {
-    public class ApiExceptions : Exception
+    public class ApiException : Exception
     {
         public HttpStatusCode StatusCode { get; set; }
 
-        public ApiExceptions(HttpStatusCode statusCode, string message) : base(message)
+        public ApiException(HttpStatusCode statusCode, string message) : base(message)
         {
             StatusCode = statusCode;
         }

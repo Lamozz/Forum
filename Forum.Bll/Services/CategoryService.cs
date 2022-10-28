@@ -10,7 +10,7 @@ namespace Forum.Bll.Services
     public class CategoryService : ICategoryService
     {
         private readonly IMapper _mapper;
-        private IRepository<Category> _repository;
+        private readonly IRepository<Category> _repository;
 
         public CategoryService(IRepository<Category> repository, IMapper mapper)
         {
