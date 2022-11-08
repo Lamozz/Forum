@@ -1,6 +1,5 @@
 ﻿using Forum.Bll.Interfaces;
 using Forum.Common.Dtos.Category;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Api.Controllers
@@ -19,7 +18,7 @@ namespace Forum.Api.Controllers
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _categoryService.GetCategoriesAsync();
-            
+
             return Ok(categories);
         }
 
@@ -33,7 +32,7 @@ namespace Forum.Api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CategoryUpdateDto categoryUpdateDto)
-        { 
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

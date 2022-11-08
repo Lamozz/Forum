@@ -23,6 +23,10 @@ builder.Services.AddAutoMapper(typeof(BllAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, ForumDbContext>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<ISectionService, SectionService>();
+builder.Services.AddScoped<IThemeService, ThemeService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

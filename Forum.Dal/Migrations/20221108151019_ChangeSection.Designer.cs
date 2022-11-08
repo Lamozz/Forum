@@ -4,6 +4,7 @@ using Forum.Dal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Dal.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    partial class ForumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221108151019_ChangeSection")]
+    partial class ChangeSection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace Forum.Dal.Migrations
 
                     b.HasIndex("ThemeId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Forum.Domain.Section", b =>
@@ -92,7 +94,7 @@ namespace Forum.Dal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Section");
                 });
 
             modelBuilder.Entity("Forum.Domain.Theme", b =>
@@ -126,7 +128,7 @@ namespace Forum.Dal.Migrations
 
                     b.HasIndex("SectionId");
 
-                    b.ToTable("Themes");
+                    b.ToTable("Theme");
                 });
 
             modelBuilder.Entity("Forum.Domain.User", b =>
@@ -185,13 +187,13 @@ namespace Forum.Dal.Migrations
                     b.HasOne("Forum.Domain.User", "Author")
                         .WithMany("Themes")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Forum.Domain.Section", "Section")
                         .WithMany("Themes")
                         .HasForeignKey("SectionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");

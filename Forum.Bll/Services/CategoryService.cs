@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Forum.Common.Exeptions;
 using Forum.Bll.Interfaces;
 using Forum.Common.Dtos.Category;
+using Forum.Common.Exeptions;
 using Forum.Dal.Interfaces;
 using Forum.Domain;
 
@@ -47,7 +47,7 @@ namespace Forum.Bll.Services
 
             if (category is null)
             {
-                throw new NotFoundException("Not Found"); 
+                throw new NotFoundException("Not Found");
             }
             _mapper.Map(categoryUpdateDto, category);
 

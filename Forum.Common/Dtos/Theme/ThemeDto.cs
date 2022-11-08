@@ -1,14 +1,12 @@
-﻿namespace Forum.Domain
+﻿namespace Forum.Common.Dtos.Theme
 {
-    public class Theme : BaseEntity
+    public class ThemeDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatingTime { get; set; }
         public int AuthorId { get; set; }
-        public User Author { get; set; }
-        public List<Message> Messages { get; set; }
-        public Section Section { get; set; }
         public int SectionId { get; set; }
     }
 }

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Api", "Forum.Api\Forum.Api.csproj", "{1C427893-63CD-450F-A0BF-84C1C8D029E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Api", "Forum.Api\Forum.Api.csproj", "{1C427893-63CD-450F-A0BF-84C1C8D029E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Bll", "Forum.Bll\Forum.Bll.csproj", "{52C7140E-48D0-49FA-823E-520F95ED0150}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Bll", "Forum.Bll\Forum.Bll.csproj", "{52C7140E-48D0-49FA-823E-520F95ED0150}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Common", "Forum.Common\Forum.Common.csproj", "{A16BB3CD-97CC-4F80-BF63-F7D4B5FDE10A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Common", "Forum.Common\Forum.Common.csproj", "{A16BB3CD-97CC-4F80-BF63-F7D4B5FDE10A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Dal", "Forum.Dal\Forum.Dal.csproj", "{7066728D-9FF8-4C55-A3B9-EBB065AE1EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Dal", "Forum.Dal\Forum.Dal.csproj", "{7066728D-9FF8-4C55-A3B9-EBB065AE1EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Domain", "Forum.Domain\Forum.Domain.csproj", "{0485E15E-7C68-4B0E-A93E-D827FE5B943B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum.Domain", "Forum.Domain\Forum.Domain.csproj", "{0485E15E-7C68-4B0E-A93E-D827FE5B943B}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Forum.Angular", "Forum.Angular\Forum.Angular.esproj", "{312A6B7D-04D2-4564-AFB8-6AC375383066}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{0485E15E-7C68-4B0E-A93E-D827FE5B943B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0485E15E-7C68-4B0E-A93E-D827FE5B943B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0485E15E-7C68-4B0E-A93E-D827FE5B943B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312A6B7D-04D2-4564-AFB8-6AC375383066}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

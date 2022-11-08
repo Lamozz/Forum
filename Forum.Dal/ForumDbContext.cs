@@ -10,6 +10,10 @@ namespace Forum.Dal
         {
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Theme> Themes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,9 +21,9 @@ namespace Forum.Dal
 
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
+            modelBuilder.ApplyConfiguration(new SectionConfiguration());
+            modelBuilder.ApplyConfiguration(new ThemeConfiguration());
         }
-
-
 
     }
 }
