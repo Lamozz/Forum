@@ -17,7 +17,8 @@ builder.Services.AddControllers(c => c.Filters.Add(typeof(ApiExceptionFilterAttr
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ForumDbContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ForumConnectionString")); });
+builder.Services.AddDbContext<ForumDbContext>(options => 
+{ options.UseSqlServer(builder.Configuration.GetConnectionString("ForumConnectionString")); });
 
 builder.Services.AddAutoMapper(typeof(BllAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IThemeService, ThemeService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 

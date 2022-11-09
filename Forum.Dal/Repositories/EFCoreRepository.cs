@@ -8,7 +8,7 @@ namespace Forum.Dal.Repositories
     public class EFCoreRepository<T> : IRepository<T>, IDisposable where T : BaseEntity
     {
         private readonly DbContext _dbContext;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
         public EFCoreRepository(DbContext dbContext)
         {
             _dbContext = dbContext;

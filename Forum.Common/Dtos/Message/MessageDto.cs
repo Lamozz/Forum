@@ -1,4 +1,6 @@
-﻿namespace Forum.Common.Dtos.Message
+﻿using Forum.Common.Dtos.User;
+
+namespace Forum.Common.Dtos.Message
 {
     public class MessageDto
     {
@@ -7,6 +9,8 @@
         public DateTime CreatingTime { get; set; }
         public int AuthorId { get; set; }
         public int ThemeId { get; set; }
+
+        public UserDto Author { get; set; }
 
     }
 }

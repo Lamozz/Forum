@@ -10,9 +10,9 @@ namespace Forum.Bll.Services
     public class CategoryService : ICategoryService
     {
         private readonly IMapper _mapper;
-        private readonly IRepository<Category> _repository;
+        private readonly ICategoryRepository _repository;
 
-        public CategoryService(IRepository<Category> repository, IMapper mapper)
+        public CategoryService(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -20,12 +20,12 @@ namespace Forum.Bll.Services
 
         public async Task<IList<CategoryDto>> GetCategoriesAsync()
         {
-            var categories = await _repository.GetAllAsync();
+            var categories = await _repository.GetAllCategoriesWithIncludeAsync();
             return categories.Select(categories => _mapper.Map<Category, CategoryDto>(categories)).ToList();
         }
         public async Task<CategoryDto> GetCategoryByIdAsync(int id)
         {
-            var category = await _repository.GetByIdAsync(id);
+            var category = await _repository.GetCategoryByIdWithIncludeAsync(id);
 
             if (category is null)
             {

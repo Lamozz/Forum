@@ -8,6 +8,8 @@ namespace Forum.Dal
     {
         public ForumDbContext(DbContextOptions<ForumDbContext> options) : base(options)
         {
+            Database.Migrate();
+            Database.EnsureCreated();
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Message> Messages { get; set; }
