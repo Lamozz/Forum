@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HomePageModule } from './_modules/home-page/home-page.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HomePageModule,
     HttpClientModule,
+    NoopAnimationsModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
