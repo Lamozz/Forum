@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forum.Api.Controllers
 {
     [Route("api/categories")]
-    public class CategoriesController : ControllerBase
+    public class CategoriesController : ApplicationControllerBase
     {
         private readonly ICategoryService _categoryService;
 

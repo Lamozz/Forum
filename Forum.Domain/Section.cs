@@ -6,6 +6,6 @@
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<Theme> Themes { get; set; }
+        public IList<Theme> Themes { get; set; }
     }
 }

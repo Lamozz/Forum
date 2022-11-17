@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forum.Api.Controllers
 {
     [Route("api/messages")]
-    public class MessagesController : ControllerBase
+    public class MessagesController : ApplicationControllerBase
     {
         private readonly IMessageService _messageService;
 

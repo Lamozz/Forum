@@ -7,8 +7,9 @@
         public DateTime CreatingTime { get; set; }
         public int AuthorId { get; set; }
         public User Author { get; set; }
-        public List<Message> Messages { get; set; }
+        public IList<Message> Messages { get; set; }
         public Section Section { get; set; }
         public int SectionId { get; set; }
     }
 }
+    

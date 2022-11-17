@@ -15,6 +15,7 @@ namespace Forum.Dal
         public DbSet<Message> Messages { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Theme> Themes { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

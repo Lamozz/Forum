@@ -3,6 +3,6 @@
     public class Category : BaseEntity
     {
         public string Title { get; set; }
-        public List<Section> Sections { get; set; }
+        public IList<Section> Sections { get; set; }
     }
 }

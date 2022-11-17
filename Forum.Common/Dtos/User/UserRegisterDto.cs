@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Forum.Common.Dtos.User
 {
-    public class UserUpdateDto
+    public class UserRegisterDto
     {
-        [MaxLength(60, ErrorMessage = "So much symbols")]
-        public string Status { get; set; }
-
-        [MinLength(1, ErrorMessage = "Need more symbols")]
-        [MaxLength(20, ErrorMessage = "So much symbols")]
+        [Required]
         public string UserName { get; set; }
 
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string Email { get; set; }
     }
 }

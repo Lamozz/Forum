@@ -9,7 +9,8 @@ namespace Forum.Bll.Profiles
         public UserProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<UserUpdateDto, User>();
+            CreateMap<UserLoginDto, User>();
+            CreateMap<UserRegisterDto, User>();
         }
     }
 }

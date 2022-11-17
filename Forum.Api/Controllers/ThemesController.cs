@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forum.Api.Controllers
 {
     [Route("api/themes")]
-    public class ThemesController : ControllerBase
+    public class ThemesController : ApplicationControllerBase
     {
         private readonly IThemeService _themeService;
 
