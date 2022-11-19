@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Forum.Bll.Infrastructure;
 using Forum.Bll.Interfaces;
 using Forum.Common.Dtos.User;
 using Forum.Common.Exeptions;
-using Forum.Dal.Interfaces;
-using Forum.Domain;
+using Forum.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,30 +13,27 @@ namespace Forum.Bll.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<User> _repository;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountService(IRepository<User> repository, IMapper mapper)
+        public AccountService(IMapper mapper, SignInManager<User> signInManager, UserManager<User> userManager)
         {
-            _repository = repository;
             _mapper = mapper;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
 
-            var alreadyExists = await _repository.GetByQueryAsync(u => u.UserName == user.UserName);
+            var identityResult = await _userManager.CreateAsync(user, userRegisterDto.Password);
 
-            if (alreadyExists.Any())
+            if (!identityResult.Succeeded)
             {
-                throw new ConflictException("User with this credentials exists");
+                throw new ConflictException("This user already exists");
             }
-
-            var hash = Cryptography.HashString(user.Password);
-            user.Password = hash.hashed;
-
-            await _repository.CreateAsync(user);
 
             return true;
         }
@@ -45,25 +41,20 @@ namespace Forum.Bll.Services
         public async Task<string> LoginUserAsync(UserLoginDto userLoginDto,
             (string Token, string Audience, string Issuer) authOptions)
         {
-            var user = (await _repository
-                .GetByQueryAsync(
-                    u => u.UserName == userLoginDto.UserName))
-                .FirstOrDefault();
 
-            if (user is null)
+            var signResult = await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+
+            if (!signResult.Succeeded)
             {
-                throw new NotFoundException("User with this credentials not found");
+                throw new NotFoundException("User not found");
             }
-
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
             var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha512);
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, userLoginDto.UserName),
                 new Claim(ClaimTypes.Role, "Admin")
             };
 

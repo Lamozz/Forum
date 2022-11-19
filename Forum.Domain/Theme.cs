@@ -1,4 +1,6 @@
-﻿namespace Forum.Domain
+﻿using Forum.Domain.Identity;
+
+namespace Forum.Domain
 {
     public class Theme : BaseEntity
     {
@@ -12,4 +14,3 @@
         public int SectionId { get; set; }
     }
 }
-    

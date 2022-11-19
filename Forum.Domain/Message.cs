@@ -1,4 +1,6 @@
-﻿namespace Forum.Domain
+﻿using Forum.Domain.Identity;
+
+namespace Forum.Domain
 {
     public class Message : BaseEntity
     {

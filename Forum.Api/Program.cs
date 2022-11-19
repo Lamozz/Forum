@@ -6,6 +6,7 @@ using Forum.Bll.Services;
 using Forum.Dal;
 using Forum.Dal.Interfaces;
 using Forum.Dal.Repositories;
+using Forum.Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,14 @@ builder.Services.AddDbContext<ForumDbContext>(options =>
 var jwtAuthOptions = builder.Configuration.ConfigureJwtAuthOptions(builder.Services);
 
 builder.Services.AddJwtAuth(jwtAuthOptions);
+builder.Services.AddIdentity<User, Role>(
+    options =>
+    {
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireDigit = false;
+        options.Password.RequireUppercase = false;
+    }).AddEntityFrameworkStores<ForumDbContext>();
 
 builder.Services.AddAutoMapper(typeof(BllAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));

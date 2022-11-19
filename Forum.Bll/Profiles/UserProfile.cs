@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Common.Dtos.User;
-using Forum.Domain;
+using Forum.Domain.Identity;
 
 namespace Forum.Bll.Profiles
 {
