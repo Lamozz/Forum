@@ -1,26 +1,30 @@
-import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomePageModule } from './_modules/home-page/home-page.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
+import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
+import {
+  FooterComponent,
+  HeaderComponent,
+  SharedModule
+} from './shared';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, FooterComponent, HeaderComponent],
   imports: [
     BrowserModule,
+    CoreModule,
+    SharedModule,
+    HomeModule,
+    AuthModule,
     AppRoutingModule,
-    HomePageModule,
-    HttpClientModule,
-    NoopAnimationsModule,
-    MatSliderModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
