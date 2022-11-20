@@ -1,4 +1,5 @@
 ﻿using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Message;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +16,19 @@ namespace Forum.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMessages()
+        public async Task<IList<MessageDto>> GetMessages()
         {
             var messages = await _messageService.GetMessagesAsync();
 
-            return Ok(messages);
+            return messages;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMessage(int id)
+        public async Task<MessageDto> GetMessage(int id)
         {
             var message = await _messageService.GetMessageByIdAsync(id);
 
-            return Ok(message);
+            return message;
         }
 
         [HttpPost]
@@ -51,7 +52,7 @@ namespace Forum.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var messageDto = await _messageService.UpdateMessageAsync(id, messageUpdateDto);
+            await _messageService.UpdateMessageAsync(id, messageUpdateDto);
 
             return NoContent();
         }

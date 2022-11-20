@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Theme;
 using Forum.Common.Exeptions;
 using Forum.Dal.Interfaces;
@@ -21,7 +22,8 @@ namespace Forum.Bll.Services
         public async Task<IList<ThemeDto>> GetThemesAsync()
         {
             var themes = await _repository.GetAllAsync();
-            return themes.Select(themes => _mapper.Map<Theme, ThemeDto>(themes)).ToList();
+
+            return _mapper.Map<IList<Theme>, IList<ThemeDto>>(themes);
         }
         public async Task<ThemeDto> GetThemeByIdAsync(int id)
         {
@@ -39,6 +41,8 @@ namespace Forum.Bll.Services
 
             await _repository.CreateAsync(theme);
 
+            await _repository.SaveChangesAsync();
+
             return _mapper.Map<Theme, ThemeDto>(theme);
         }
         public async Task<ThemeDto> UpdateThemeAsync(int id, ThemeUpdateDto themeUpdateDto)
@@ -51,7 +55,7 @@ namespace Forum.Bll.Services
             }
             _mapper.Map(themeUpdateDto, theme);
 
-            await _repository.UpdateAsync(theme);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Theme, ThemeDto>(theme);
         }
@@ -59,6 +63,8 @@ namespace Forum.Bll.Services
         public async Task DeleteThemeAsync(int id)
         {
             await _repository.DeleteByIdAsync(id);
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

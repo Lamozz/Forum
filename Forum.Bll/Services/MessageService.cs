@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Message;
 using Forum.Common.Exeptions;
 using Forum.Dal.Interfaces;
@@ -21,7 +22,8 @@ namespace Forum.Bll.Services
         public async Task<IList<MessageDto>> GetMessagesAsync()
         {
             var messages = await _repository.GetAllAsync();
-            return messages.Select(messages => _mapper.Map<Message, MessageDto>(messages)).ToList();
+
+            return _mapper.Map<IList<Message>, IList<MessageDto>>(messages);
         }
         public async Task<MessageDto> GetMessageByIdAsync(int id)
         {
@@ -39,6 +41,8 @@ namespace Forum.Bll.Services
 
             await _repository.CreateAsync(message);
 
+            await _repository.SaveChangesAsync();
+
             return _mapper.Map<Message, MessageDto>(message);
         }
         public async Task<MessageDto> UpdateMessageAsync(int id, MessageUpdateDto messageUpdateDto)
@@ -51,7 +55,7 @@ namespace Forum.Bll.Services
             }
             _mapper.Map(messageUpdateDto, message);
 
-            await _repository.UpdateAsync(message);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Message, MessageDto>(message);
         }
@@ -59,6 +63,8 @@ namespace Forum.Bll.Services
         public async Task DeleteMessageAsync(int id)
         {
             await _repository.DeleteByIdAsync(id);
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

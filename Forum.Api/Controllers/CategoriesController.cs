@@ -15,19 +15,19 @@ namespace Forum.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategories()
+        public async Task<IList<CategoryDto>> GetCategories()
         {
             var categories = await _categoryService.GetCategoriesAsync();
 
-            return Ok(categories);
+            return categories;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategory(int id)
+        public async Task<CategoryDto> GetCategory(int id)
         {
             var category = await _categoryService.GetCategoryByIdAsync(id);
 
-            return Ok(category);
+            return category;
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace Forum.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var categoryDto = await _categoryService.UpdateCategoryAsync(id, categoryUpdateDto);
+            await _categoryService.UpdateCategoryAsync(id, categoryUpdateDto);
 
             return NoContent();
         }

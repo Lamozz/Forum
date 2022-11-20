@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Forum.Dal.Repositories
 {
-    public class EFCoreRepository<T> : IRepository<T>, IDisposable where T : BaseEntity
+    public class EFCoreRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly DbContext _dbContext;
         protected readonly DbSet<T> _dbSet;
@@ -18,19 +18,12 @@ namespace Forum.Dal.Repositories
         public async Task CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteByIdAsync(int id)
         {
            T entity = await GetByIdAsync(id);
             _dbSet.Remove(entity);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            _dbContext.Dispose();
         }
 
         public async Task<IList<T>> GetAllAsync()
@@ -48,9 +41,8 @@ namespace Forum.Dal.Repositories
             return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task SaveChangesAsync()
         {
-            _dbSet.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
     }

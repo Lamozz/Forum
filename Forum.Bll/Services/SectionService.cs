@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Section;
 using Forum.Common.Exeptions;
 using Forum.Dal.Interfaces;
@@ -21,7 +22,8 @@ namespace Forum.Bll.Services
         public async Task<IList<SectionDto>> GetSectionsAsync()
         {
             var sections = await _repository.GetAllAsync();
-            return sections.Select(sections => _mapper.Map<Section, SectionDto>(sections)).ToList();
+
+            return _mapper.Map<IList<Section>, IList<SectionDto>>(sections);
         }
         public async Task<SectionDto> GetSectionByIdAsync(int id)
         {
@@ -39,6 +41,8 @@ namespace Forum.Bll.Services
 
             await _repository.CreateAsync(section);
 
+            await _repository.SaveChangesAsync();
+
             return _mapper.Map<Section, SectionDto>(section);
         }
         public async Task<SectionDto> UpdateSectionAsync(int id, SectionUpdateDto sectionUpdateDto)
@@ -51,7 +55,7 @@ namespace Forum.Bll.Services
             }
             _mapper.Map(sectionUpdateDto, section);
 
-            await _repository.UpdateAsync(section);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Section, SectionDto>(section);
         }
@@ -59,6 +63,8 @@ namespace Forum.Bll.Services
         public async Task DeleteSectionAsync(int id)
         {
             await _repository.DeleteByIdAsync(id);
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

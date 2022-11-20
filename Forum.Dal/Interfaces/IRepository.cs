@@ -9,7 +9,7 @@ namespace Forum.Dal.Interfaces
         Task<IList<T>> GetByQueryAsync(Expression<Func<T, bool>> predicate);
         Task<IList<T>> GetAllAsync();
         Task CreateAsync(T entity);
-        Task UpdateAsync(T entity);
         Task DeleteByIdAsync(int id);
+        Task SaveChangesAsync();
     }
 }

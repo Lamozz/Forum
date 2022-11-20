@@ -1,4 +1,5 @@
 ﻿using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Theme;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +16,19 @@ namespace Forum.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetThemes()
+        public async Task<IList<ThemeDto>> GetThemes()
         {
             var themes = await _themeService.GetThemesAsync();
 
-            return Ok(themes);
+            return themes;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTheme(int id)
+        public async Task<ThemeDto> GetTheme(int id)
         {
             var theme = await _themeService.GetThemeByIdAsync(id);
 
-            return Ok(theme);
+            return theme;
         }
 
         [HttpPost]
@@ -51,7 +52,7 @@ namespace Forum.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var themeDto = await _themeService.UpdateThemeAsync(id, themeUpdateDto);
+            await _themeService.UpdateThemeAsync(id, themeUpdateDto);
 
             return NoContent();
         }

@@ -21,7 +21,8 @@ namespace Forum.Bll.Services
         public async Task<IList<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _repository.GetAllCategoriesWithIncludeAsync();
-            return categories.Select(categories => _mapper.Map<Category, CategoryDto>(categories)).ToList();
+
+            return _mapper.Map<IList<Category>, IList<CategoryDto>>(categories);
         }
         public async Task<CategoryDto> GetCategoryByIdAsync(int id)
         {
@@ -38,6 +39,8 @@ namespace Forum.Bll.Services
             var category = _mapper.Map<Category>(categoryUpdateDto);
 
             await _repository.CreateAsync(category);
+            
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Category, CategoryDto>(category);
         }
@@ -51,7 +54,7 @@ namespace Forum.Bll.Services
             }
             _mapper.Map(categoryUpdateDto, category);
 
-            await _repository.UpdateAsync(category);
+            await _repository.SaveChangesAsync();
 
             return _mapper.Map<Category, CategoryDto>(category);
         }
@@ -59,6 +62,8 @@ namespace Forum.Bll.Services
         public async Task DeleteCategoryAsync(int id)
         {
             await _repository.DeleteByIdAsync(id);
+
+            await _repository.SaveChangesAsync();
         }
     }
 }

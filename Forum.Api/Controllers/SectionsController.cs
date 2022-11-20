@@ -1,4 +1,5 @@
 ﻿using Forum.Bll.Interfaces;
+using Forum.Common.Dtos.Category;
 using Forum.Common.Dtos.Section;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +16,19 @@ namespace Forum.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetSections()
+        public async Task<IList<SectionDto>> GetSections()
         {
             var sections = await _sectionService.GetSectionsAsync();
 
-            return Ok(sections);
+            return sections;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSection(int id)
+        public async Task<SectionDto> GetSection(int id)
         {
             var section = await _sectionService.GetSectionByIdAsync(id);
 
-            return Ok(section);
+            return section;
         }
 
         [HttpPost]
@@ -51,7 +52,7 @@ namespace Forum.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var sectionDto = await _sectionService.UpdateSectionAsync(id, sectionUpdateDto);
+            await _sectionService.UpdateSectionAsync(id, sectionUpdateDto);
 
             return NoContent();
         }
