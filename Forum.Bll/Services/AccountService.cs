@@ -53,14 +53,14 @@ namespace Forum.Bll.Services
 
             if (existingUser is null)
             {
-                throw new NotFoundException("User not found");
+                throw new NotFoundException($"User with username: {userLoginDto.UserName} not found");
             }
 
             var signResult = await _signInManager.CheckPasswordSignInAsync(existingUser, userLoginDto.Password, false);
 
             if (!signResult.Succeeded)
             {
-                throw new ForbiddenException("Check username or password! Something wrong");
+                throw new ForbiddenException($"{userLoginDto.UserName} has another password.");
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));
