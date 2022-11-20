@@ -26,13 +26,20 @@ namespace Forum.Bll.Services
 
         public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
         {
+            var existingUser = await _userManager.FindByNameAsync(userRegisterDto.UserName);
+
+            if (existingUser is not null)
+            {
+                throw new ConflictException("This user already exist");
+            }
+
             var user = _mapper.Map<UserRegisterDto, User>(userRegisterDto);
 
             var identityResult = await _userManager.CreateAsync(user, userRegisterDto.Password);
 
             if (!identityResult.Succeeded)
             {
-                throw new ConflictException("This user already exists");
+                throw new Exception("Error");
             }
 
             return true;
@@ -42,11 +49,18 @@ namespace Forum.Bll.Services
             (string Token, string Audience, string Issuer) authOptions)
         {
 
-            var signResult = await _signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, false);
+            var  existingUser = await _userManager.FindByNameAsync(userLoginDto.UserName);
+
+            if (existingUser is null)
+            {
+                throw new NotFoundException("User not found");
+            }
+
+            var signResult = await _signInManager.CheckPasswordSignInAsync(existingUser, userLoginDto.Password, false);
 
             if (!signResult.Succeeded)
             {
-                throw new NotFoundException("User not found");
+                throw new ForbiddenException("Check username or password! Something wrong");
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Token));

@@ -11,7 +11,11 @@ namespace Forum.Api.Infrastructure.Extensions
         public static void AddJwtAuth(this IServiceCollection services, JwtAuthOptions jwtAuthOptions)
         {
             services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddAuthentication(options =>
+                {
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters()
