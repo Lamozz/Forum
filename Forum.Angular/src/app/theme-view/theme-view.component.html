@@ -1,0 +1,52 @@
+<div class="home-page">
+    <div>
+        <mat-list>
+            <mat-list-item *ngFor="let message of messages">
+                <mat-card>
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{message.user }}</mat-card-title>
+                        <mat-card-subtitle>{{message.creatingTime}}</mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <p>
+                            {{message.text}}
+                        </p>
+                      </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
+
+
+
+
+
+
+        <table mat-table [dataSource]="messages" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="text">
+            <th mat-header-cell *matHeaderCellDef> Text </th>
+            <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="creatingTime">
+            <th mat-header-cell *matHeaderCellDef> CreatingTime</th>
+            <td mat-cell *matCellDef="let element"> {{element.creatingTime}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef> Author </th>
+            <td mat-cell *matCellDef="let element"> <a [routerLink]="['user', element.id]">{{element.author}}</a> </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+  </div>
+  

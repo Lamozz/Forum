@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class ApplicationControllerBase : ControllerBase
     {

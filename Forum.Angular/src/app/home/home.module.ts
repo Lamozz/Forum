@@ -6,12 +6,14 @@ import { HomeAuthResolver } from './home-auth-resolver.service';
 import { SharedModule } from '../shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { MaterialModule } from '../shared/material/material.module';
+import { CategoryViewModule } from '../category-view/category-view.module';
 
 @NgModule({
   imports: [
     SharedModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    CategoryViewModule
   ],
   declarations: [
     HomeComponent
