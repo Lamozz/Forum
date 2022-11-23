@@ -1,4 +1,6 @@
-﻿using Forum.Dal.Interfaces;
+﻿using Forum.Common.Models;
+using Forum.Dal.Extensions;
+using Forum.Dal.Interfaces;
 using Forum.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +32,12 @@ namespace Forum.Dal.Repositories
                 .ThenInclude(theme => theme.Messages)
                 .ThenInclude(message => message.Author);
             
+        }
+
+        public async Task<PaginateResult<Category>> GetAllCategoriesWithPaginate(PaginateRequest paginateRequest)
+        {
+            var query = IncludeAll();
+            return await query.GetPaginationResultAsync(paginateRequest);
         }
     }
 }

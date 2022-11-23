@@ -22,6 +22,22 @@ namespace Forum.Dal.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Forum.Domain.Avatar", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Avatar");
+                });
+
             modelBuilder.Entity("Forum.Domain.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -324,6 +340,17 @@ namespace Forum.Dal.Migrations
                     b.ToTable("Themes");
                 });
 
+            modelBuilder.Entity("Forum.Domain.Avatar", b =>
+                {
+                    b.HasOne("Forum.Domain.Identity.User", "User")
+                        .WithOne("Avatar")
+                        .HasForeignKey("Forum.Domain.Avatar", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Forum.Domain.Identity.RoleClaim", b =>
                 {
                     b.HasOne("Forum.Domain.Identity.Role", null)
@@ -431,6 +458,8 @@ namespace Forum.Dal.Migrations
 
             modelBuilder.Entity("Forum.Domain.Identity.User", b =>
                 {
+                    b.Navigation("Avatar");
+
                     b.Navigation("Messages");
 
                     b.Navigation("Themes");

@@ -1,0 +1,8 @@
+<form [formGroup]="messageForm" (ngSubmit)="createMessage()" novalidate>
+    <h1 color="primary">{{title}}</h1>
+    <mat-form-field appearance="outline" class="form-group">
+        <textarea type="text" matInput formControlName="text" placeholder="Enter message text..."></textarea>
+        <mat-error *ngIf="messageForm.controls['text'].invalid">Message is required</mat-error>
+    </mat-form-field>
+    <button type="submit">Create</button>
+</form>

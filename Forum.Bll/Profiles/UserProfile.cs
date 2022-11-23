@@ -11,6 +11,7 @@ namespace Forum.Bll.Profiles
             CreateMap<User, UserDto>();
             CreateMap<UserLoginDto, User>();
             CreateMap<UserRegisterDto, User>();
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }

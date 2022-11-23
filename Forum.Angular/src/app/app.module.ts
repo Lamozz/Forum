@@ -12,6 +12,9 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptors';
+import { AuthGuard } from './core/services/auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -24,7 +27,10 @@ import { MaterialModule } from './shared/material/material.module';
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+ 
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

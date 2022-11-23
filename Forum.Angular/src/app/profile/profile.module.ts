@@ -19,7 +19,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
     ProfileFavoritesComponent
   ],
   providers: [
-    ProfileResolver
+    
   ]
 })
 export class ProfileModule {}

@@ -5,14 +5,12 @@ import { HomeAuthResolver } from './home-auth-resolver.service';
 import { CategoryViewComponent } from '../category-view/category-view.component';
 import { SectionViewComponent } from '../section-view/section-view.component';
 import { ThemeViewComponent } from '../theme-view/theme-view.component';
+import { MessageAddComponent } from '../message-add/message-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    resolve: {
-      isAuthenticated: HomeAuthResolver
-    }
+    component: HomeComponent
   },
   {
     path: 'category/:categoryId',

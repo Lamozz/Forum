@@ -2,8 +2,10 @@
 using Forum.Bll.Interfaces;
 using Forum.Common.Dtos.Category;
 using Forum.Common.Exeptions;
+using Forum.Common.Models;
 using Forum.Dal.Interfaces;
 using Forum.Domain;
+using Microsoft.Extensions.Hosting;
 
 namespace Forum.Bll.Services
 {
@@ -64,6 +66,12 @@ namespace Forum.Bll.Services
             await _repository.DeleteByIdAsync(id);
 
             await _repository.SaveChangesAsync();
+        }
+
+        public async Task<PaginateResult<CategoryDto>> GetPaginatedCategoriesAsync(PaginateRequest paginateRequest)
+        {
+            var categoriesPaginationResult = await _repository.GetAllCategoriesWithPaginate(paginateRequest);
+            return _mapper.Map<PaginateResult<Category>, PaginateResult<CategoryDto>>(categoriesPaginationResult);
         }
     }
 }

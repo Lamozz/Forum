@@ -1,4 +1,6 @@
-﻿using Forum.Dal.Interfaces;
+﻿using Forum.Common.Models;
+using Forum.Dal.Extensions;
+using Forum.Dal.Interfaces;
 using Forum.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -44,6 +46,11 @@ namespace Forum.Dal.Repositories
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<PaginateResult<T>> GetPagedAsync(PaginateRequest paginateRequest)
+        {
+            return await _dbSet.GetPaginationResultAsync(paginateRequest);
         }
     }
 }

@@ -8,6 +8,6 @@ export interface Theme {
     creatingTime: Date;
     authorId: number;
     sectionId: number;
-    user?: User;
+    author?: User;
     messages?: Message[];
 }
