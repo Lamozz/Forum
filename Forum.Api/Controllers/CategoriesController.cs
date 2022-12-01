@@ -1,6 +1,8 @@
 ﻿using Forum.Bll.Interfaces;
 using Forum.Common.Dtos.Category;
+using Forum.Common.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace Forum.Api.Controllers
 {
@@ -28,6 +30,13 @@ namespace Forum.Api.Controllers
             var category = await _categoryService.GetCategoryByIdAsync(id);
 
             return category;
+        }
+
+        [HttpPost("paginate")]
+        public async Task<IActionResult> GetPagedHostel([FromBody] PaginateRequest paginateRequest)
+        {
+            var paginatedHostels = await _categoryService.GetPaginatedCategoriesAsync(paginateRequest);
+            return Ok(paginatedHostels);
         }
 
         [HttpPost]

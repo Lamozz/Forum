@@ -10,9 +10,6 @@ const routes: Routes = [
   {
     path: ':username',
     component: ProfileComponent,
-    resolve: {
-      profile: ProfileResolver
-    },
     children: [
       {
         path: '',

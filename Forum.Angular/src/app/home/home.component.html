@@ -2,8 +2,8 @@
 
   <div class="banner" *appShowAuthed="false">
     <div class="container">
-      <h1 class="logo-font">forum</h1>
-      <p>A place to share your <i>Angular</i> knowledge.</p>
+      <h1 class="logo-font">Forum</h1>
+      <p>A place to share your knowledge.</p>
     </div>
   </div>
 
@@ -17,8 +17,30 @@
               <a class="nav-link"
                  [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}"
                  (click)="setListTo('all')">
-                 Global Feed
+                 Category list
               </a>
+            </li>
+            <li>
+              Sorting: 
+              <mat-form-field appearance="fill">
+                <select matNativeControl required [(ngModel)]="sortDirection" (change)="changeTable()">
+                  <option value="desc">desc</option>
+                  <option value="asc">asc</option>
+                </select>
+              </mat-form-field>
+            </li>
+            <li>
+              Category:
+              <mat-form-field appearance="fill">
+                <select matNativeControl required [(ngModel)]="filter" (change)="changeTable()">
+                  <option value="">
+                    -----
+                  </option>
+                  <option value="angular">
+                    Angular
+                  </option>
+                </select>
+              </mat-form-field>
             </li>
             <li class="nav-item" [hidden]="!listConfig.filters.tag">
               <a class="nav-link active">
@@ -29,18 +51,18 @@
         </div>
 
         <div>
-          <table mat-table [dataSource]="categories" class="mat-elevation-z8">
+          <table 
+            mat-table 
+            matSort matSortActive="title" 
+            matSortDirection={{sortDirection}}
+            [dataSource]="categories"
+            class="mat-elevation-z8">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Position Column -->
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Id. </th>
               <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
           
-            <!-- Name Column -->
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef> Title </th>
               <td mat-cell *matCellDef="let element"> <a [routerLink]="['category', element.id]" >{{element.title}}</a> </td>
@@ -50,7 +72,12 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
-        
+        <mat-paginator [length]="paginateResult?.totalItems"
+              [pageSize]="paginator?.pageSize"
+              [pageSizeOptions]="[2, 10, 25, 100]"
+              aria-label="Select page"
+              (page)="setCategories()">
+        </mat-paginator>
       </div>
       
 

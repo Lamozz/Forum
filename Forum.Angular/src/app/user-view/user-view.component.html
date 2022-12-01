@@ -1,0 +1,17 @@
+<p>username:  {{user.userName}}</p>
+<p>user ID:   {{user.id}}</p>
+
+
+<img [src]="imageUrl" alt="">
+<form [formGroup]="imageForm" (ngSubmit)="ChangeAvatar()" novalidate>
+    <input 
+        #fileUpload 
+        type="file" 
+        formControlName="image" 
+        accept="image/png, image/jpeg" 
+        (change)="onImageChanged($event)" 
+        hidden>
+    <button mat-raised-button (click)="fileUpload.click()" color="primary" type="button">Upload image</button>
+    <mat-error *ngIf="imageForm.controls['image'].invalid">Image is required</mat-error>
+    <button type="submit">Save</button>
+</form>

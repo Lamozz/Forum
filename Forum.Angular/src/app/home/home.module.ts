@@ -19,7 +19,6 @@ import { CategoryViewModule } from '../category-view/category-view.module';
     HomeComponent
   ],
   providers: [
-    HomeAuthResolver
   ]
 })
 export class HomeModule {}

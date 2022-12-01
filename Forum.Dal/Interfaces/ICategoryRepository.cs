@@ -1,4 +1,5 @@
-﻿using Forum.Domain;
+﻿using Forum.Common.Models;
+using Forum.Domain;
 
 namespace Forum.Dal.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Forum.Dal.Interfaces
     {
         public Task<Category> GetCategoryByIdWithIncludeAsync(int id);
         public Task<IList<Category>> GetAllCategoriesWithIncludeAsync();
+        Task<PaginateResult<Category>> GetAllCategoriesWithPaginate(PaginateRequest paginateRequest);
     }
 }

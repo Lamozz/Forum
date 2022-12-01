@@ -68,6 +68,7 @@ namespace Forum.Bll.Services
 
             var claims = new List<Claim>()
             {
+                new Claim(ClaimTypes.NameIdentifier, existingUser.Id.ToString()),
                 new Claim(ClaimTypes.Name, userLoginDto.UserName),
                 new Claim(ClaimTypes.Role, "Admin")
             };

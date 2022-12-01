@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from '../home/home-routing.module';
 import { MaterialModule } from '../shared/material/material.module';
 import { ThemeViewComponent } from './theme-view.component';
+import { MessageAddModule } from '../message-add/message-add.module';
 
 
 
@@ -14,6 +15,7 @@ import { ThemeViewComponent } from './theme-view.component';
     CommonModule,
     MaterialModule,
     HomeRoutingModule,
+    MessageAddModule
   ],
   exports: [
     ThemeViewComponent

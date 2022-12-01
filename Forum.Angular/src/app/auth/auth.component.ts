@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {User} from '../_models/user/user'
 import { Errors, UserService } from '../core';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -19,11 +20,12 @@ export class AuthComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    private account: AccountService
   ) {
     // use FormBuilder to create a form group
     this.authForm = this.fb.group({
-      'email': ['', Validators.required],
+      'username': ['', Validators.required],
       'password': ['', Validators.required]
     });
   }
@@ -36,7 +38,7 @@ export class AuthComponent implements OnInit {
       this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
       // add form control for username if this is the register page
       if (this.authType === 'register') {
-        this.authForm.addControl('username', new UntypedFormControl());
+        this.authForm.addControl('email', new UntypedFormControl());
       }
     });
   }
@@ -46,14 +48,15 @@ export class AuthComponent implements OnInit {
     this.errors = {errors: {}};
 
     const credentials = this.authForm.value;
-    this.userService
-    .attemptAuth(this.authType, credentials)
-    .subscribe(
-      data => this.router.navigateByUrl('/'),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      }
-    );
+    if (this.authType === 'login'){
+      this.account.login(credentials).subscribe(
+        {next: () => {this.router.navigate(["/"]);}}
+      );
+    }
+    if (this.authType === 'register'){
+      this.account.register(credentials).subscribe(
+      {next: () => {this.router.navigate(["/login"]);}}
+      );
+    }
   }
 }

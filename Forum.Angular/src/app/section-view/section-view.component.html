@@ -22,9 +22,9 @@
             <td mat-cell *matCellDef="let element"> {{element.creatingTime}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="user">
+            <ng-container matColumnDef="author">
             <th mat-header-cell *matHeaderCellDef> Author </th>
-            <td mat-cell *matCellDef="let element"> <a [routerLink]="['user', element.user]">{{element.user}} </a> </td>
+            <td mat-cell *matCellDef="let element"> <a [routerLink]="['/user/profile', element.id]">{{element?.author.userName}}</a></td>
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

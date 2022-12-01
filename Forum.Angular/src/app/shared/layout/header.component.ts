@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import { User, UserService } from '../../core';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
   selector: 'app-layout-header',
@@ -8,7 +8,8 @@ import { User, UserService } from '../../core';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    public accountService: AccountService
   ) {}
 
   currentUser: User;

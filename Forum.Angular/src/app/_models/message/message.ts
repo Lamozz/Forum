@@ -6,5 +6,5 @@ export interface Message {
     creatingTime: Date;
     authorId: number;
     themeId: number;
-    user?: User;
+    author?: User;
 }

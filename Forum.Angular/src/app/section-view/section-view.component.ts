@@ -20,17 +20,16 @@ export class SectionViewComponent implements OnInit {
   ngOnInit(): void {
     let categoryid: number = this.route.snapshot.params['categoryId'];
     let sectionid: number = this.route.snapshot.params['sectionId'];
-    let userid: number = this.route.snapshot.params['authorId']
     this.categoryService.getCategory(categoryid).subscribe((result) => {
       
       let section = result.sections.find((Section) => {return Section.id.toString() === sectionid.toString();});
       this.themes = section.themes;
-      
+      console.log(this.themes);
     });
     this.dataSource = new MatTableDataSource(this.themes);
   }
 
-  displayedColumns: string[] = ['id', 'title', 'description', 'creatingTime'];
+  displayedColumns: string[] = ['id', 'title', 'description', 'creatingTime', 'author'];
   public themes: Theme[];
   public user: User;
   public dataSource;

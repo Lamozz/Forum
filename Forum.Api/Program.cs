@@ -33,6 +33,16 @@ builder.Services.AddIdentity<User, Role>(
         options.Password.RequireUppercase = false;
     }).AddEntityFrameworkStores<ForumDbContext>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PinzaruPolicy", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
+
 builder.Services.AddAutoMapper(typeof(BllAssemblyMarker));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
 builder.Services.AddScoped<DbContext, ForumDbContext>();
@@ -42,8 +52,11 @@ builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IThemeService, ThemeService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
 
 var app = builder.Build();
+
+app.UseCors("PinzaruPolicy");
 
 app.UseCustomExceptionHandler();
 

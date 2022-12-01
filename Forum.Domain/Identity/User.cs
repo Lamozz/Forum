@@ -6,5 +6,6 @@ namespace Forum.Domain.Identity
     {
         public IList<Message> Messages { get; set; }
         public IList<Theme> Themes { get; set; }
+        public Avatar Avatar { get; set; }
     }
 }

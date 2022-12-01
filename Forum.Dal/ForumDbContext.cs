@@ -38,6 +38,7 @@ namespace Forum.Dal
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
             modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new ThemeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             UseIdentityConfiguration(modelBuilder);
         }
